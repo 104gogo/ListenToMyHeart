@@ -1,0 +1,16 @@
+# Uncomment this line to define a global platform for your project
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+inhibit_all_warnings!
+
+# pod 'SDWebImage','4.0.0'
+# pod 'SDCycleScrollView', '1.74'
+# pod 'Bugly', '~> 2.4.8'
+# pod 'UIButtonState','1.0.1'
+pod 'ReactiveCocoa', '2.5.0'
+# pod 'IQKeyboardManager', '5.0.4'
+# pod 'MJRefresh', '3.1.15'
+
+target 'AwesomeProject' do
+    
+end

@@ -9,7 +9,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  NativeModules,
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -21,6 +22,7 @@ const instructions = Platform.select({
 
 export default class App extends Component<{}> {
   render() {
+    NativeModules.RNTest.print('hello RN!'); // 使用ios自定义的方法
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
