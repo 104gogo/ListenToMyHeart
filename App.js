@@ -22,7 +22,7 @@ const instructions = Platform.select({
 
 export default class App extends Component<{}> {
   render() {
-    NativeModules.RNTest.print('hello RN!'); // 使用ios自定义的方法
+    NativeModules.RNTest.requestUrl(); // 使用ios自定义的方法请求数据
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
