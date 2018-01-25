@@ -12,6 +12,7 @@ import {
   View,
   NativeModules,
 } from 'react-native';
+import Sound from 'react-native-sound';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -20,7 +21,17 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-export default class App extends Component<{}> {
+export default class App extends Component {
+  componentDidMount() {
+    const s = new Sound('https://languagezenstorage.blob.core.windows.net/media0/xgcUXjHhP8.mp3',null, (e) => {
+      if (e) {
+        console.log('播放失败');
+        return;
+      }
+      s.play(() => s.release());
+    });
+  }
+
   render() {
     NativeModules.RNTest.requestUrl(); // 使用ios自定义的方法请求数据
     return (

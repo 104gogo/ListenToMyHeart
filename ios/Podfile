@@ -13,4 +13,6 @@ pod 'ReactiveCocoa', '2.5.0'
 
 target 'AwesomeProject' do
     
+  pod 'RNSound', :path => '../node_modules/react-native-sound'
+
 end
