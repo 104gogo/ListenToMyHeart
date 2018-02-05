@@ -23,17 +23,19 @@ const instructions = Platform.select({
 
 export default class App extends Component {
   componentDidMount() {
-    const s = new Sound('https://languagezenstorage.blob.core.windows.net/media0/xgcUXjHhP8.mp3',null, (e) => {
-      if (e) {
-        console.log('播放失败');
-        return;
-      }
-      s.play(() => s.release());
+    NativeModules.RNTest.requestUrl(url => {
+      console.log('url', url);
+      const s = new Sound(url, null, e => {
+        if (e) {
+          console.log('播放失败');
+          return;
+        }
+        s.play(() => s.release());
+      });
     });
   }
 
   render() {
-    NativeModules.RNTest.requestUrl(); // 使用ios自定义的方法请求数据
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>

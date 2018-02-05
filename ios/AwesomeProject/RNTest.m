@@ -9,10 +9,10 @@ RCT_EXPORT_METHOD(print:(NSString *)text) {
 }
 
 
-RCT_EXPORT_METHOD(requestUrl) {
+RCT_EXPORT_METHOD(requestUrl:(RCTResponseSenderBlock)callback) {
     //send a GET request to server with some params  
 
-    NSString *urlString = @"https://api.github.com/users/104gogo";
+    NSString *urlString = @"http://localhost:7002/story";
 //     urlString = [urlString stringByAppendingString:@"?p=1059"];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];  
@@ -23,6 +23,7 @@ RCT_EXPORT_METHOD(requestUrl) {
         if ([data length] > 0 && connectionError == nil) {  
             NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];  
             NSLog(@"HTML = %@",html);  
+            callback(@[html]);
         }else if([data length] == 0 && connectionError == nil){  
             NSLog(@"nothing was download.");  
         }else if(connectionError != nil){  
