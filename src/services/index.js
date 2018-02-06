@@ -1,6 +1,6 @@
-import * as login from './login';
+import * as bookList from './bookList';
 
 export default {
-  login
+  bookList
 };
 

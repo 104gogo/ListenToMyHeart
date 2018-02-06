@@ -1,7 +1,7 @@
-import login from './login';
 import router from './router';
+import bookList from './bookList';
 
 export default (app) => {
-  app.model(login);
   app.model(router);
+  app.model(bookList);
 };
