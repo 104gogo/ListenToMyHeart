@@ -1,0 +1,10 @@
+{
+  "parser": "babel-eslint",
+  "extends": "eslint-config-hcb",
+  "rules": {
+    "react/prefer-stateless-function": 0
+  },
+  "globals": {
+    "__DEV__": true
+  }
+}

@@ -1,4 +1,5 @@
 import { AppRegistry } from 'react-native';
+import './src/configs';
 import App from './src/App';
 
-AppRegistry.registerComponent('ListenToMyHeart', App);
+AppRegistry.registerComponent('RNPro', App);
