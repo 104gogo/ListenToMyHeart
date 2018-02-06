@@ -1,5 +1,5 @@
 {
-  "name": "AwesomeProject",
+  "name": "ListenToMyHeart",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "react": "16.2.0",
-    "react-native": "0.52.1",
-    "react-native-sound": "^0.10.4"
+    "react-native": "0.53.0",
+    "react-native-sound": "^0.10.5"
   },
   "devDependencies": {
     "babel-jest": "22.1.0",
