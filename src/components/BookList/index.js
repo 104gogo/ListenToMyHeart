@@ -11,7 +11,7 @@ import StyleProvider from '../common/StyleProvider';
 export default class BookList extends PureComponent {
   render() {
     const { books } = this.props;
-console.log('books', books);
+
     return (
       <StyleProvider>
         <Container>
