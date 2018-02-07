@@ -8,7 +8,7 @@ const transformUrl = (params = {}) =>
 
 export function get(url, params) {
   return new Promise((resolve) => {
-    NativeModules.RNRequest.get(`${url}?${transformUrl(params)}`, resolve);
+    NativeModules.RNRequest.get(`${url}${params ? '?' : ''}${transformUrl(params)}`, resolve);
   });
 }
 

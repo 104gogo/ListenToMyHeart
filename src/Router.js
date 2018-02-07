@@ -1,12 +1,15 @@
 import React from 'react';
 import { connect } from 'dva-no-router';
 import { StackNavigator, addNavigationHelpers } from 'react-navigation';
-import { BookList, UserManage, UserDetails } from './pages';
+import { BookList, ChapterDetail, UserManage, UserDetails } from './pages';
 
 const AppNavigator = StackNavigator(
   {
     BookList: {
       screen: BookList,
+    },
+    ChapterDetail: {
+      screen: ChapterDetail,
     },
     UserManage: {
       screen: UserManage,

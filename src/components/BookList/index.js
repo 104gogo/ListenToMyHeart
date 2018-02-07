@@ -9,6 +9,10 @@ import images from '../../themes/images';
 import StyleProvider from '../common/StyleProvider';
 
 export default class BookList extends PureComponent {
+  toChapterDetail(id) {
+    this.props.navigation.navigate('ChapterDetail', { id });
+  }
+
   render() {
     const { books } = this.props;
 
@@ -22,8 +26,8 @@ export default class BookList extends PureComponent {
             <List
               style={style.list}
               dataArray={books}
-              renderRow={({ title, lastChapter }) =>
-                <ListItem thumbnail>
+              renderRow={({ _id, title, lastChapter }) =>
+                <ListItem thumbnail onPress={() => this.toChapterDetail(_id)}>
                   <Thumbnail square size={80} source={images.headImg} />
                   <Body>
                     <Text>{title}</Text>
