@@ -10,14 +10,13 @@ import styles from './styles';
 
 export default class Articles extends PureComponent {
   render() {
-    const { content = '', onLinePress } = this.props;
-    const lines = content.split(/\r\n|[\r\n]/);
+    const { lines, onLinePress } = this.props;
 
     return (
       <ScrollView style={styles.wrapper} showsPagination={false}>
         {lines.map((line, index) =>
           <View style={styles.slide} key={index}>
-            <TouchableOpacity onLongPress={() => onLinePress(line)}>
+            <TouchableOpacity onLongPress={() => onLinePress(line, index)}>
               <Text style={styles.text}>{line}</Text>
             </TouchableOpacity>
           </View>

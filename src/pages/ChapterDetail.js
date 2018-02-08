@@ -13,8 +13,8 @@ function mapDispatchToProps(dispatch) {
       dispatch({ type: 'chapterDetail/getInitData', payload: { id } });
     },
     // 获取语音合成后的mp3
-    getMp3Url(text) {
-      dispatch({ type: 'chapterDetail/getMp3Url', payload: { text } });
+    getMp3Url(text, index) {
+      dispatch({ type: 'chapterDetail/getMp3Url', payload: { text, index } });
     },
   };
 }

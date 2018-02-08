@@ -24,33 +24,46 @@ export default class ChapterDetail extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     if ('url' in nextProps) {
-      const s = new Sound(nextProps.url, null, (e) => {
+      const { url, chapter: { lines }, readIndex } = nextProps;
+      const s = new Sound(url, null, (e) => {
         if (e) {
           console.log('播放失败');
           return;
         }
-        s.play(() => s.release());
+        s.play((success) => {
+          if (success) {
+            const nextIndex = readIndex + 1;
+            if (nextIndex < lines.length) {
+              this.props.getMp3Url(lines[nextIndex], nextIndex);
+            } else {
+              console.log('播放完毕');
+              return;
+            }
+          }
+          s.release();
+        });
       });
     }
   }
 
-  onLinePress(text) {
-    this.props.getMp3Url(text);
+  onLinePress(text, index) {
+    this.props.getMp3Url(text, index);
   }
 
   render() {
     const { chapter } = this.props;
+    const { title, lines } = chapter;
 
     return (
       <View style={styles.container}>
         <StatusBar hidden />
         <View style={styles.header}>
-          <Text>{chapter.title}</Text>
+          <Text>{title}</Text>
         </View>
         <Articles
           lineHeight={25}
           fontSize={18}
-          content={chapter.content}
+          lines={lines}
           onLinePress={this.onLinePress}
         />
       </View>

@@ -3,8 +3,11 @@ import services from '../services';
 const initialState = {
   bookSources: [], // 书源列表
   chapters: [], // 章节列表
-  chapter: {}, // 章节内容
+  chapter: {
+    lines: [], // 章节内容每行数组
+  },
   url: '',
+  readIndex: -1,
 };
 
 export default {
@@ -32,6 +35,7 @@ export default {
       const { chapter: { body } } = yield call(services.chapterDetail.getChapter, encodeURIComponent(chapter.link));
 
       chapter.content = body;
+      chapter.lines = body.split(/\r\n|[\r\n]/);
 // console.log('chapter', chapter);
       // for (let i = 0; i < bookIds.length; i += 1) {
       //   const id = bookIds[i];
@@ -42,9 +46,9 @@ export default {
       yield put({ type: 'updateState', payload: { chapter } });
     },
 
-    * getMp3Url({ payload: { text } }, { put, call }) {
+    * getMp3Url({ payload: { text, index } }, { put, call }) {
       const { url } = yield call(services.chapterDetail.getMp3Url, encodeURIComponent(text));
-      yield put({ type: 'updateState', payload: { url } });
+      yield put({ type: 'updateState', payload: { url, readIndex: index } });
     }
   },
 
