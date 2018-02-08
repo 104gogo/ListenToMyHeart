@@ -16,6 +16,9 @@ function mapDispatchToProps(dispatch) {
     getMp3Url(text, index) {
       dispatch({ type: 'chapterDetail/getMp3Url', payload: { text, index } });
     },
+    updateState(state) {
+      dispatch({ type: 'chapterDetail/updateState', payload: state });
+    },
   };
 }
 

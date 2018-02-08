@@ -6,8 +6,9 @@ const initialState = {
   chapter: {
     lines: [], // 章节内容每行数组
   },
-  url: '',
-  readIndex: -1,
+  url: '', // mp3地址
+  readIndex: -1, // 阅读的行数
+  isRead: false, // 是否在阅读
 };
 
 export default {
@@ -28,7 +29,7 @@ export default {
       let sourceId = bookSources.length > 1 ? bookSources[1]._id : bookSources[0]._id;
       sourceId = (bookSources.find(({ source }) => source === 'my176') || {})._id || sourceId;
 
-      const { chapters } = yield call(services.chapterDetail.getChapters, sourceId);
+      const { chapters = [] } = yield call(services.chapterDetail.getChapters, sourceId);
 // console.log('chapters', chapters);
       const chapter = chapters[0];
 
@@ -37,11 +38,6 @@ export default {
       chapter.content = body;
       chapter.lines = body.split(/\r\n|[\r\n]/);
 // console.log('chapter', chapter);
-      // for (let i = 0; i < bookIds.length; i += 1) {
-      //   const id = bookIds[i];
-      //   const book = yield call(services.bookList.getBook, id);
-      //   books.push(book);
-      // }
 
       yield put({ type: 'updateState', payload: { chapter } });
     },
