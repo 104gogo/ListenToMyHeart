@@ -14,3 +14,8 @@ export function getChapters(sourceId) {
 export function getChapter(link) {
   return get(`/chapter/${link}`);
 }
+
+// 获取小说章节内容
+export function getMp3Url(text) {
+  return get('/story', { text });
+}

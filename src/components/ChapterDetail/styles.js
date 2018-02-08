@@ -7,8 +7,12 @@ export default StyleSheet.create({
   },
   header: {
     height: 20,
+    marginLeft: 10,
   },
-  body: {
-    flex: 1,
+  wrapper: {
+  },
+  text: {
+    fontSize: 18,
+    lineHeight: 25,
   },
 });
