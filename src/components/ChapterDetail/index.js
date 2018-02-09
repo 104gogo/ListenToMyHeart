@@ -19,9 +19,9 @@ export default class ChapterDetail extends PureComponent {
   }
 
   componentDidMount() {
-    const { navigation, getInitData } = this.props;
+    const { navigation, getBookSources } = this.props;
 
-    getInitData(navigation.state.params.id);
+    getBookSources(navigation.state.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
