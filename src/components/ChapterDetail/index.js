@@ -7,21 +7,26 @@ import {
 } from 'react-native';
 import Sound from 'react-native-sound';
 
-import { Articles } from '../common';
+import { Articles, Back } from '../common';
 import styles from './styles';
 
 export default class ChapterDetail extends PureComponent {
   constructor() {
     super();
 
-    this.handleLinePress = this.handleLinePress.bind(this);
+    this.state = { isShowHeader: false };
+
+    this.handleLineLongPress = this.handleLineLongPress.bind(this);
     this.handleShowModal = this.handleShowModal.bind(this);
+    this.handleSoundClose = this.handleSoundClose.bind(this);
+    this.handleToolBar = this.handleToolBar.bind(this);
   }
 
   componentDidMount() {
     const { navigation, getBookSources } = this.props;
 
     getBookSources(navigation.state.params.id);
+    // getBookSources('55eef8b27445ad27755670b9');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -46,27 +51,45 @@ export default class ChapterDetail extends PureComponent {
             }
           }
 
-          this.soundClose();
+          this.handleSoundClose();
         });
       });
     }
   }
 
-  soundClose() {
-    this.sound.release();
-    console.log('播放完毕');
-    this.props.updateState({ isRead: false });
+  componentWillUnmount() {
+    this.handleSoundClose();
   }
 
-  handleLinePress(text, index) {
+  handleSoundClose() {
+    const { isRead, updateState } = this.props;
+
+    if (isRead) {
+      this.sound.release();
+      console.log('停止播放');
+      updateState({ isRead: false });
+    }
+  }
+
+  handleLineLongPress(text, index) {
     this.props.getMp3Url(text, index);
   }
 
+  // 控制工具栏的显隐
+  handleToolBar() {
+    this.setState({ isShowHeader: !this.state.isShowHeader });
+  }
+
+  // 显示播放栏
   handleShowModal() {
-    this.soundClose();
+    // TODO
+
+
+    this.handleSoundClose();
   }
 
   render() {
+    const { isShowHeader } = this.state;
     const { chapter, isRead } = this.props;
     const { title, lines } = chapter;
 
@@ -76,14 +99,20 @@ export default class ChapterDetail extends PureComponent {
         fontSize={18}
         isRead={isRead}
         lines={lines}
-        onLinePress={this.handleLinePress}
+        onLineLongPress={this.handleLineLongPress}
+        onLinePress={this.handleToolBar}
       />
     );
 
     return (
       <View style={styles.container}>
         <StatusBar hidden />
-        <View style={styles.header}>
+        {isShowHeader ? (
+          <View style={styles.header}>
+            <Back />
+          </View>
+        ) : null}
+        <View style={styles.title}>
           <Text>{title}</Text>
         </View>
         {isRead ? (

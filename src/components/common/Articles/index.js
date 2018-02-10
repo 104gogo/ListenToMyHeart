@@ -10,7 +10,7 @@ import styles from './styles';
 
 export default class Articles extends PureComponent {
   render() {
-    const { lines, onLinePress, isRead } = this.props;
+    const { lines, onLinePress, onLineLongPress, isRead } = this.props;
 
     const renderLine = line => <Text style={styles.text}>{line}</Text>;
 
@@ -19,7 +19,10 @@ export default class Articles extends PureComponent {
         {lines.map((line, index) =>
           <View style={styles.slide} key={index}>
             {!isRead ? (
-              <TouchableOpacity onLongPress={() => onLinePress(line, index)}>
+              <TouchableOpacity
+                onPress={onLinePress}
+                onLongPress={() => onLineLongPress(line, index)}
+              >
                 {renderLine(line)}
               </TouchableOpacity>
             ) : (

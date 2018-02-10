@@ -5,7 +5,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgb(196, 196, 196)',
   },
-  header: {
+  title: {
     height: 20,
     marginLeft: 10,
   },
@@ -14,5 +14,13 @@ export default StyleSheet.create({
   text: {
     fontSize: 18,
     lineHeight: 25,
+  },
+  header: {
+    position: 'absolute',
+    backgroundColor: '#1e1e1e',
+    width: '100%',
+    height: 65,
+    zIndex: 10,
+    justifyContent: 'center',
   },
 });
