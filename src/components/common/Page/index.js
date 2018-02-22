@@ -23,12 +23,13 @@ export default class Page extends PureComponent {
     );
 
     const swiperProps = {
-      index: 1,
+      index: 0,
       loadMinimal: true,
       loadMinimalSize: 1,
       style: styles.wrapper,
       showsPagination: false,
       onMomentumScrollEnd: (event, state) => {
+        console.log('onMomentumScrollEnd')
         onIndexChanged(state.index);
       }
     };

@@ -7,10 +7,11 @@ function mapStateToProps({ chapterDetail }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    // 获取初始化数据，书源列表、章节列表、章节内容
-    getBookSources(id) {
-      dispatch({ type: 'chapterDetail/resetState' });
-      dispatch({ type: 'chapterDetail/getBookSources', payload: { id } });
+    // 获取章节内容
+    getChapter(pn) {
+      // dispatch({ type: 'chapterDetail/resetState' });
+      dispatch({ type: 'chapterDetail/updateState', payload: { pn } });
+      dispatch({ type: 'chapterDetail/getChapter' });
     },
     // 获取语音合成后的mp3
     getMp3Url(text, index) {

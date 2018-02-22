@@ -23,15 +23,16 @@ export default class ChapterDetail extends PureComponent {
   }
 
   componentDidMount() {
-    const { navigation, getBookSources } = this.props;
+    const { navigation, getChapter } = this.props;
 
-    getBookSources(navigation.state.params.id);
-    // getBookSources('55eef8b27445ad27755670b9');
+    getChapter(0);
+    // getChapter('55eef8b27445ad27755670b9');
   }
 
   componentWillReceiveProps(nextProps) {
     if ('url' in nextProps && this.props.url !== nextProps.url) {
-      const { url, chapter: { lines }, readIndex, updateState } = nextProps;
+      const { url, chapters, readIndex, updateState, pn } = nextProps;
+      const { lines } = chapters[pn];
 
       const sound = new Sound(url, null, (e) => {
         if (e) {
@@ -88,8 +89,9 @@ console.log('handleShowModal');
     this.handleSoundClose();
   }
 
-  handlePageIndexChanged(index) {
-    console.log('index', index);
+  // 翻页获取内容
+  handlePageIndexChanged(pn) {
+    this.props.getChapter(pn);
   }
 
   render() {

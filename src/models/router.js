@@ -16,24 +16,31 @@ const actions = [
 
 export default {
   namespace: 'router',
+
   state: {
     ...routerReducer(),
   },
+
   reducers: {
     apply(state, { payload: action }) {
       return routerReducer(state, action);
     },
   },
+
   effects: {
     watch: [
-      function* subscription({ take, put }) {
+      function* subscription({ take, put, select }) {
         while (true) {
           const payload = yield take(actions);
           yield put(createAction('apply')(payload));
           console.log('11111', payload);
-          // if (payload.type === 'Navigation/NAVIGATE') {
-          //   console.log('11111', payload);
-          // }
+
+          if (payload.routeName === 'ChapterDetail') {
+            const { chapter } = yield select(({ bookList }) => bookList);
+            const { id } = payload.params;
+
+            yield put({ type: 'chapterDetail/updateState', payload: { chapters: chapter[id], bookId: id } });
+          }
         }
       }, watcher]
   },
