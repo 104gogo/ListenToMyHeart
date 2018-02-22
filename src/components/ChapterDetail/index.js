@@ -3,11 +3,10 @@ import {
   Text,
   View,
   StatusBar,
-  TouchableOpacity
 } from 'react-native';
 import Sound from 'react-native-sound';
 
-import { Articles, Back } from '../common';
+import { Back, Page } from '../common';
 import styles from './styles';
 
 export default class ChapterDetail extends PureComponent {
@@ -20,6 +19,7 @@ export default class ChapterDetail extends PureComponent {
     this.handleShowModal = this.handleShowModal.bind(this);
     this.handleSoundClose = this.handleSoundClose.bind(this);
     this.handleToolBar = this.handleToolBar.bind(this);
+    this.handlePageIndexChanged = this.handlePageIndexChanged.bind(this);
   }
 
   componentDidMount() {
@@ -83,26 +83,18 @@ export default class ChapterDetail extends PureComponent {
   // 显示播放栏
   handleShowModal() {
     // TODO
-
+console.log('handleShowModal');
 
     this.handleSoundClose();
   }
 
+  handlePageIndexChanged(index) {
+    console.log('index', index);
+  }
+
   render() {
     const { isShowHeader } = this.state;
-    const { chapter, isRead } = this.props;
-    const { title, lines } = chapter;
-
-    const renderArticle = () => (
-      <Articles
-        lineHeight={25}
-        fontSize={18}
-        isRead={isRead}
-        lines={lines}
-        onLineLongPress={this.handleLineLongPress}
-        onLinePress={this.handleToolBar}
-      />
-    );
+    const { chapters, isRead, pn } = this.props;
 
     return (
       <View style={styles.container}>
@@ -113,13 +105,17 @@ export default class ChapterDetail extends PureComponent {
           </View>
         ) : null}
         <View style={styles.title}>
-          <Text>{title}</Text>
+          <Text>{chapters[pn] && chapters[pn].title}</Text>
         </View>
-        {isRead ? (
-          <TouchableOpacity onPress={this.handleShowModal}>
-            {renderArticle()}
-          </TouchableOpacity>
-        ) : renderArticle()}
+        <Page
+          isRead={isRead}
+          pn={pn}
+          chapters={chapters}
+          onLineLongPress={this.handleLineLongPress}
+          onLinePress={this.handleToolBar}
+          onArticlePress={this.handleShowModal}
+          onIndexChanged={this.handlePageIndexChanged}
+        />
       </View>
     );
   }

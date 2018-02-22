@@ -8,7 +8,7 @@ import {
 
 import styles from './styles';
 
-export default class Articles extends PureComponent {
+export default class Article extends PureComponent {
   render() {
     const { lines, onLinePress, onLineLongPress, isRead } = this.props;
 

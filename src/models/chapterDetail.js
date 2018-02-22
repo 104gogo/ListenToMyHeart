@@ -93,16 +93,17 @@ export default {
       // 否则调用接口
       } else {
         const { chapter: { body } } = yield call(services.chapterDetail.getChapter, encodeURIComponent(chapter.link));
-        chapter.content = body;
-        chapter.lines = body.split(/\r\n|[\r\n]/);
+        const lines = body.split(/\r\n|[\r\n]/);
 
         // 存入缓存
-        chaptersObj[pn] = chapter;
+        chaptersObj[pn] = { ...chapter, content: body, lines };
         storageCapter[bookId] = chaptersObj;
         yield call(storage.set, 'storageCapter', storageCapter);
       }
 
-      yield put({ type: 'updateState', payload: { chapter } });
+      const newChapters = [...chapters.slice(0, pn), chaptersObj[pn], ...chapters.slice(pn + 1)];
+console.log('newChapters', newChapters);
+      yield put({ type: 'updateState', payload: { chapters: newChapters } });
     },
 
     // 获取语音合成的mp3地址
