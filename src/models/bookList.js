@@ -21,13 +21,16 @@ export default {
   effects: {
     // 获取小说列表
     * getBooks({ payload }, { put, call, select }) {
-      const storageBook = yield call(storage.get, 'storageBook');
+      let storageBook = yield call(storage.get, 'storageBook');
+      storageBook = storageBook || {};
+
       const { bookIds } = yield select(({ bookList }) => bookList);
       const books = [];
 
       for (let i = 0; i < bookIds.length; i += 1) {
         const id = bookIds[i];
         const book = yield call(services.bookList.getBook, id);
+
         books.push(book);
       }
 

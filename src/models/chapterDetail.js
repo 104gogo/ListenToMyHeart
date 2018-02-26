@@ -66,6 +66,7 @@ export default {
     // 获取语音合成的mp3地址
     * getMp3Url({ payload: { text, index } }, { put, call }) {
       const { url } = yield call(services.chapterDetail.getMp3Url, encodeURIComponent(text));
+
       yield put({ type: 'updateState', payload: { url, readIndex: index } });
     }
   },

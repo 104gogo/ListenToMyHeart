@@ -5,10 +5,12 @@
 RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(get:(NSString *)requestUrl callback:(RCTResponseSenderBlock)callback) {
-  NSString *urlString = @"http://localhost:7002";
+  NSString *urlString = @"http://120.79.72.243:7001";
+  // NSString *urlString = @"http://172.16.77.253:7002";
   urlString = [urlString stringByAppendingString:requestUrl];
 
   NSURL *url = [NSURL URLWithString:urlString];
+
   NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
   [urlRequest setTimeoutInterval:30.0f];
   [urlRequest setHTTPMethod:@"GET"];

@@ -4,7 +4,11 @@ import registerModels from './models';
 import Router from './Router';
 
 // 1. Initialize
-const app = dva();
+const app = dva({
+  onError(e) {
+    console.log(e);
+  }
+});
 
 // 2. Model
 registerModels(app);

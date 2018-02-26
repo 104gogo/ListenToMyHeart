@@ -26,3 +26,7 @@ yarn add react-native-sound
 react-native link react-native-sound
 ```
 但是执行了上面的操作还是报错，我是通过[手动link](https://facebook.github.io/react-native/docs/linking-libraries-ios.html#manual-linking)来解决的
+
+### App Transport Security
+App Transport Security(简称ATS)是iOS 9中新增的一项安全特性。在默认设置下，只允许HTTPS的请求，而所有HTTP的请求都会被拒绝
+解决办法：[RN 直接在 HTTP 协议下GET/POST](https://www.jianshu.com/p/5be468c1712f?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation)
