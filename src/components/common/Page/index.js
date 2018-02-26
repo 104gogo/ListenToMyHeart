@@ -23,15 +23,16 @@ export default class Page extends PureComponent {
     );
 
     const swiperProps = {
-      index: 0,
-      loadMinimal: true,
-      loadMinimalSize: 1,
+      // index: 0,
+      // loadMinimal: true,
+      // loadMinimalSize: 1,
       style: styles.wrapper,
       showsPagination: false,
       onMomentumScrollEnd: (event, state) => {
-        console.log('onMomentumScrollEnd')
+        console.log('onMomentumScrollEnd', state.index)
         onIndexChanged(state.index);
-      }
+      },
+      loop: false, // 设置loop为false，避免出现意想不到的问题
     };
 
     return (

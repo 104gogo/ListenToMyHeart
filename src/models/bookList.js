@@ -62,7 +62,8 @@ export default {
     * getChapters({ payload: { bookSources, id } }, { put, call }) {
       const bookSource = bookSources.find(({ source }) => source === 'my176');
       const { chapters } = yield call(services.chapterDetail.getChapters, bookSource._id);
-
+console.log('bookSources', bookSources);
+console.log('chapters', chapters);
       yield put({ type: 'updateChapter', payload: { id, chapters } });
     },
 
