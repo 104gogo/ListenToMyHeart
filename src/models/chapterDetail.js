@@ -38,7 +38,7 @@ export default {
     // 获取小说章节内容
     * getChapter({ payload }, { put, call, select }) {
       const { chapter: bookListChapter } = yield select(({ bookList }) => bookList);
-      const { storageCapter, pn, bookId } = yield select(({ chapterDetail }) => chapterDetail);
+      const { storageCapter, pn, bookId, isRead } = yield select(({ chapterDetail }) => chapterDetail);
 
       const chaptersObj = storageCapter[bookId] || {};
       const chapters = bookListChapter[bookId];
@@ -60,7 +60,7 @@ export default {
 
       const newChapters = [...chapters.slice(0, pn), chaptersObj[pn], ...chapters.slice(pn + 1)];
 
-      yield put({ type: 'updateState', payload: { chapters: newChapters, readIndex: 0 } });
+      yield put({ type: 'updateState', payload: { chapters: newChapters, readIndex: isRead ? 0 : -1 } });
     },
 
     // 获取语音合成的mp3地址

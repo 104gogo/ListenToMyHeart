@@ -30,7 +30,7 @@ export default class ChapterDetail extends PureComponent {
     // 循环播放mp3
     if ('url' in nextProps && this.props.url !== nextProps.url) {
       const { url, chapters, readIndex, pn } = nextProps;
-      const { lines } = chapters[pn];
+      const { lines = [] } = chapters[pn];
 
       const sound = new Sound(url, null, (e) => {
         if (e) {
@@ -52,7 +52,7 @@ export default class ChapterDetail extends PureComponent {
             }
 
             // 翻页
-            this.props.getChapter(pn + 1);
+            this.page.scrollBy(pn + 1);
             return;
           }
 
@@ -122,6 +122,7 @@ console.log('handleShowModal');
           <Text>{chapters[pn] && chapters[pn].title}</Text>
         </View>
         <Page
+          ref={page => this.page = page}
           isRead={isRead}
           pn={pn}
           readIndex={readIndex}

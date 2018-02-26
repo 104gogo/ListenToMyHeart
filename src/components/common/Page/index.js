@@ -9,10 +9,13 @@ import Article from '../Article';
 import styles from './styles';
 
 export default class Page extends PureComponent {
+  scrollBy(pn) {
+    this.swiper.scrollBy(pn);
+  }
+
   render() {
     const {
       readIndex,
-      pn,
       chapters,
       isRead,
       onLinePress,
@@ -32,7 +35,7 @@ export default class Page extends PureComponent {
     );
 
     const swiperProps = {
-      index: pn,
+      index: 0,
       // loadMinimal: true,
       // loadMinimalSize: 1,
       style: styles.wrapper,
@@ -45,7 +48,7 @@ export default class Page extends PureComponent {
     };
 
     return (
-      <Swiper {...swiperProps}>
+      <Swiper {...swiperProps} ref={swiper => this.swiper = swiper}>
         {
           chapters.map(({ lines = [] }, index) => (
             <View style={styles.slide} key={index}>
