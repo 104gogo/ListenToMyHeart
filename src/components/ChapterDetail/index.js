@@ -23,17 +23,15 @@ export default class ChapterDetail extends PureComponent {
   }
 
   componentDidMount() {
-    const { navigation, getChapter } = this.props;
-
-    getChapter(0);
-    // getChapter('55eef8b27445ad27755670b9');
+    this.props.getChapter(0);
   }
 
   componentWillReceiveProps(nextProps) {
+    // 循环播放mp3
     if ('url' in nextProps && this.props.url !== nextProps.url) {
-      const { url, chapters, readIndex, updateState, pn } = nextProps;
+      const { url, chapters, readIndex, pn } = nextProps;
       const { lines } = chapters[pn];
-console.log('循环播放', lines);
+
       const sound = new Sound(url, null, (e) => {
         if (e) {
           console.log('播放失败');
@@ -41,7 +39,7 @@ console.log('循环播放', lines);
         }
 
         this.sound = sound;
-        updateState({ isRead: true });
+        this.props.updateState({ isRead: true });
 
         sound.play((success) => {
           if (success) {
@@ -52,11 +50,23 @@ console.log('循环播放', lines);
               this.props.getMp3Url(lines[nextIndex], nextIndex);
               return;
             }
+
+            // 翻页
+            this.props.getChapter(pn + 1);
+            return;
           }
 
           this.handleSoundClose();
         });
       });
+    }
+
+    // 自动翻页，获取mp3
+    if ('chapters' in nextProps && this.props.chapters !== nextProps.chapters && nextProps.isRead) {
+      const { chapters, readIndex, pn } = nextProps;
+      const { lines } = chapters[pn];
+
+      this.props.getMp3Url(lines[readIndex], readIndex);
     }
   }
 

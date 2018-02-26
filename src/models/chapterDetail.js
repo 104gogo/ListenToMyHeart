@@ -60,7 +60,7 @@ export default {
 
       const newChapters = [...chapters.slice(0, pn), chaptersObj[pn], ...chapters.slice(pn + 1)];
 
-      yield put({ type: 'updateState', payload: { chapters: newChapters } });
+      yield put({ type: 'updateState', payload: { chapters: newChapters, readIndex: 0 } });
     },
 
     // 获取语音合成的mp3地址

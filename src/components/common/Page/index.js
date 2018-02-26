@@ -10,7 +10,16 @@ import styles from './styles';
 
 export default class Page extends PureComponent {
   render() {
-    const { chapters, onLinePress, onLineLongPress, onArticlePress, onIndexChanged, isRead, readIndex } = this.props;
+    const {
+      readIndex,
+      pn,
+      chapters,
+      isRead,
+      onLinePress,
+      onLineLongPress,
+      onArticlePress,
+      onIndexChanged,
+    } = this.props;
 
     const renderArticle = lines => (
       <Article
@@ -23,7 +32,7 @@ export default class Page extends PureComponent {
     );
 
     const swiperProps = {
-      // index: 0,
+      index: pn,
       // loadMinimal: true,
       // loadMinimalSize: 1,
       style: styles.wrapper,
