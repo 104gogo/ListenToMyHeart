@@ -10,9 +10,17 @@ import styles from './styles';
 
 export default class Article extends PureComponent {
   render() {
-    const { lines, onLinePress, onLineLongPress, isRead } = this.props;
+    const { lines, onLinePress, onLineLongPress, isRead, readIndex } = this.props;
 
-    const renderLine = line => <Text style={styles.text}>{line}</Text>;
+    const renderLine = (line, index) => {
+      const isCurrentLine = readIndex === index;
+
+      return (
+        <Text style={[styles.text, isCurrentLine && { backgroundColor: '#888d8d' }]}>
+          {line}
+        </Text>
+      );
+    };
 
     return (
       <ScrollView style={styles.wrapper} showsPagination={false}>
@@ -23,10 +31,10 @@ export default class Article extends PureComponent {
                 onPress={onLinePress}
                 onLongPress={() => onLineLongPress(line, index)}
               >
-                {renderLine(line)}
+                {renderLine(line, index)}
               </TouchableOpacity>
             ) : (
-              renderLine(line)
+              renderLine(line, index)
             )}
           </View>
         )}

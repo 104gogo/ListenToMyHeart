@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import {
-  Text,
   View,
   TouchableOpacity,
 } from 'react-native';
@@ -11,11 +10,12 @@ import styles from './styles';
 
 export default class Page extends PureComponent {
   render() {
-    const { chapters, onLinePress, onLineLongPress, onArticlePress, onIndexChanged, isRead } = this.props;
+    const { chapters, onLinePress, onLineLongPress, onArticlePress, onIndexChanged, isRead, readIndex } = this.props;
 
     const renderArticle = lines => (
       <Article
         isRead={isRead}
+        readIndex={readIndex}
         lines={lines}
         onLineLongPress={onLineLongPress}
         onLinePress={onLinePress}

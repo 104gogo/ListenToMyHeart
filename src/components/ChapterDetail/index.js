@@ -33,7 +33,7 @@ export default class ChapterDetail extends PureComponent {
     if ('url' in nextProps && this.props.url !== nextProps.url) {
       const { url, chapters, readIndex, updateState, pn } = nextProps;
       const { lines } = chapters[pn];
-
+console.log('循环播放', lines);
       const sound = new Sound(url, null, (e) => {
         if (e) {
           console.log('播放失败');
@@ -46,6 +46,8 @@ export default class ChapterDetail extends PureComponent {
         sound.play((success) => {
           if (success) {
             const nextIndex = readIndex + 1;
+
+            // 换行
             if (nextIndex < lines.length) {
               this.props.getMp3Url(lines[nextIndex], nextIndex);
               return;
@@ -96,7 +98,7 @@ console.log('handleShowModal');
 
   render() {
     const { isShowHeader } = this.state;
-    const { chapters, isRead, pn } = this.props;
+    const { chapters, isRead, pn, readIndex } = this.props;
 
     return (
       <View style={styles.container}>
@@ -112,6 +114,7 @@ console.log('handleShowModal');
         <Page
           isRead={isRead}
           pn={pn}
+          readIndex={readIndex}
           chapters={chapters}
           onLineLongPress={this.handleLineLongPress}
           onLinePress={this.handleToolBar}
