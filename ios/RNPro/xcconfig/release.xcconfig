@@ -1,0 +1,3 @@
+API_URL = @"120.79.72.243:7001"
+
+#include "common.xcconfig"

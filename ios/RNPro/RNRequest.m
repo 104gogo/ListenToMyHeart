@@ -5,9 +5,8 @@
 RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(get:(NSString *)requestUrl callback:(RCTResponseSenderBlock)callback) {
-  NSString *urlString = @"http://120.79.72.243:7001";
-  // NSString *urlString = @"http://172.16.77.253:7002";
-  urlString = [urlString stringByAppendingString:requestUrl];
+  NSString *urlString = [API_URL stringByAppendingString:requestUrl];
+  urlString = [@"http://" stringByAppendingString:urlString];
 
   NSURL *url = [NSURL URLWithString:urlString];
 

@@ -19,10 +19,10 @@
   NSURL *jsCodeLocation;
 
   // 模拟器测试
-  // jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
   
   // 打包手机测试,改成访问本地的js服务器
-  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"bundles/main" withExtension:@"jsbundle"];
+//  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"bundles/main" withExtension:@"jsbundle"];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"RNPro"

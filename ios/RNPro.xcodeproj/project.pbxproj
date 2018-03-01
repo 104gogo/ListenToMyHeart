@@ -48,6 +48,12 @@
 		AF722954202964E0007F21D3 /* RNTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF722953202964E0007F21D3 /* RNTest.m */; };
 		AF72295F20296516007F21D3 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF72295B2029650B007F21D3 /* libRNSound.a */; };
 		AF722965202996AE007F21D3 /* RNRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AF722963202996AE007F21D3 /* RNRequest.m */; };
+		AFCAD65D2047AE2400E7808D /* common.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AFCAD65A2047AE2400E7808D /* common.xcconfig */; };
+		AFCAD65E2047AE2400E7808D /* common.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AFCAD65A2047AE2400E7808D /* common.xcconfig */; };
+		AFCAD65F2047AE2400E7808D /* debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AFCAD65B2047AE2400E7808D /* debug.xcconfig */; };
+		AFCAD6602047AE2400E7808D /* debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AFCAD65B2047AE2400E7808D /* debug.xcconfig */; };
+		AFCAD6612047AE2400E7808D /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AFCAD65C2047AE2400E7808D /* release.xcconfig */; };
+		AFCAD6622047AE2400E7808D /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AFCAD65C2047AE2400E7808D /* release.xcconfig */; };
 		B0C71D5F71E94F80BD3FD2D8 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 105175983C0A4912BD118B96 /* Zocial.ttf */; };
 		B159C442EE0F41F7B17C37B4 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10FFBB945B404DF8AE7E41E1 /* EvilIcons.ttf */; };
 		B50025C4BD7B4D2BB848F43C /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63CF15FF90F445E085DF3EF4 /* Entypo.ttf */; };
@@ -387,6 +393,9 @@
 		AF7229552029650B007F21D3 /* RNSound.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
 		AF722963202996AE007F21D3 /* RNRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNRequest.m; path = RNPro/RNRequest.m; sourceTree = "<group>"; };
 		AF722964202996AE007F21D3 /* RNRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNRequest.h; path = RNPro/RNRequest.h; sourceTree = "<group>"; };
+		AFCAD65A2047AE2400E7808D /* common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = common.xcconfig; path = RNPro/xcconfig/common.xcconfig; sourceTree = SOURCE_ROOT; };
+		AFCAD65B2047AE2400E7808D /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = RNPro/xcconfig/debug.xcconfig; sourceTree = SOURCE_ROOT; };
+		AFCAD65C2047AE2400E7808D /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = release.xcconfig; path = RNPro/xcconfig/release.xcconfig; sourceTree = SOURCE_ROOT; };
 		BD4F4C5FA30F40E286C86C78 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		BD554FFDE740490E9FCE7DEA /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -529,6 +538,7 @@
 		13B07FAE1A68108700A75B9A /* RNPro */ = {
 			isa = PBXGroup;
 			children = (
+				AFCAD6592047AE0800E7808D /* xcconfig */,
 				AF53ADB62044FF11007DB108 /* bundles */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -680,6 +690,16 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AFCAD6592047AE0800E7808D /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				AFCAD65A2047AE2400E7808D /* common.xcconfig */,
+				AFCAD65B2047AE2400E7808D /* debug.xcconfig */,
+				AFCAD65C2047AE2400E7808D /* release.xcconfig */,
+			);
+			path = xcconfig;
 			sourceTree = "<group>";
 		};
 		B4E7E2DC202D49FD9ABD637A /* Resources */ = {
@@ -1159,6 +1179,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFCAD6622047AE2400E7808D /* release.xcconfig in Resources */,
+				AFCAD6602047AE2400E7808D /* debug.xcconfig in Resources */,
+				AFCAD65E2047AE2400E7808D /* common.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1169,6 +1192,8 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				B50025C4BD7B4D2BB848F43C /* Entypo.ttf in Resources */,
+				AFCAD65D2047AE2400E7808D /* common.xcconfig in Resources */,
+				AFCAD6612047AE2400E7808D /* release.xcconfig in Resources */,
 				B159C442EE0F41F7B17C37B4 /* EvilIcons.ttf in Resources */,
 				69457D4A29CE4849B6BAAA88 /* FontAwesome.ttf in Resources */,
 				ECC69B3236A5475786B97DA8 /* Foundation.ttf in Resources */,
@@ -1176,6 +1201,7 @@
 				B920E836F9054D2A978CA594 /* Ionicons.ttf in Resources */,
 				43E7C89E80F24FE08462DBA8 /* MaterialIcons.ttf in Resources */,
 				CC38F3DDB2AC40C7AA703C92 /* Octicons.ttf in Resources */,
+				AFCAD65F2047AE2400E7808D /* debug.xcconfig in Resources */,
 				FCFD850FCEB24283A3916072 /* Roboto_medium.ttf in Resources */,
 				ACFEC14EAA2645A481377047 /* Roboto.ttf in Resources */,
 				3377E0A846EE4EF9B40F892A /* rubicon-icon-font.ttf in Resources */,
@@ -1356,6 +1382,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFCAD65B2047AE2400E7808D /* debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1379,6 +1406,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFCAD65C2047AE2400E7808D /* release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
