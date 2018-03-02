@@ -1,5 +1,8 @@
 import services from '../services';
 import storage from '../utils/storage';
+import { Loading } from '../components/common';
+
+let count = 0; // 统计请求数
 
 export default {
   namespace: 'bookList',
@@ -21,6 +24,8 @@ export default {
   effects: {
     // 获取小说列表
     * getBooks({ payload }, { put, call, select }) {
+      Loading.show();
+
       let storageBook = yield call(storage.get, 'storageBook');
       storageBook = storageBook || {};
 
@@ -33,7 +38,6 @@ export default {
 
         books.push(book);
       }
-
       yield put({ type: 'updateState', payload: { books, storageBook } });
 
       for (let i = 0; i < bookIds.length; i += 1) {
@@ -43,6 +47,8 @@ export default {
 
     // 从缓存中读取小说的数据
     * getBookSources({ payload: { id } }, { put, call, select }) {
+      Loading.show();
+
       const { storageBook } = yield select(({ bookList }) => bookList);
 
       let bookSources = [];
@@ -62,12 +68,19 @@ export default {
     },
 
     // 获取小说章节列表
-    * getChapters({ payload: { bookSources, id } }, { put, call }) {
+    * getChapters({ payload: { bookSources, id } }, { put, call, select }) {
+      const { bookIds } = yield select(({ bookList }) => bookList);
       const bookSource = bookSources.find(({ source }) => source === 'my176');
       const { chapters } = yield call(services.chapterDetail.getChapters, bookSource._id);
 console.log('bookSources', bookSources);
 console.log('chapters', chapters);
       yield put({ type: 'updateChapter', payload: { id, chapters } });
+
+      count += 1;
+
+      if (count === bookIds.length) {
+        Loading.hide();
+      }
     },
 
   },

@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'dva-no-router';
 import { StackNavigator, addNavigationHelpers } from 'react-navigation';
-import { BookList, ChapterDetail, UserManage, UserDetails } from './pages';
+import { BookList, ChapterDetail } from './pages';
+import { Root } from './components/common';
 
 const AppNavigator = StackNavigator(
   {
@@ -10,12 +11,6 @@ const AppNavigator = StackNavigator(
     },
     ChapterDetail: {
       screen: ChapterDetail,
-    },
-    UserManage: {
-      screen: UserManage,
-    },
-    UserDetails: {
-      screen: UserDetails,
     },
   },
   {
@@ -28,7 +23,11 @@ const AppNavigator = StackNavigator(
 
 const Router = ({ dispatch, router }) => {
   const navigation = addNavigationHelpers({ dispatch, state: router });
-  return <AppNavigator navigation={navigation} />;
+  return (
+    <Root>
+      <AppNavigator navigation={navigation} />
+    </Root>
+  );
 };
 
 function mapStateToProps({ router }) {
