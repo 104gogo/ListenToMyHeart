@@ -1384,6 +1384,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AFCAD65B2047AE2400E7808D /* debug.xcconfig */;
 			buildSettings = {
+				APP_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				APP_DISPLAY_NAME = "听书神器开发版";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -1408,6 +1410,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AFCAD65C2047AE2400E7808D /* release.xcconfig */;
 			buildSettings = {
+				APP_BUNDLE_IDENTIFIER = cn.gogo.release;
+				APP_DISPLAY_NAME = "听说神器体验版";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LJTDBM4U3C;
