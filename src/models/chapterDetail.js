@@ -2,6 +2,7 @@ import services from '../services';
 import storage from '../utils/storage';
 
 const initialState = {
+  storagePageNumber: {},
   storageCapter: {}, // 缓存的小说内容数据, { 55eef8b27445ad27755670b9: { 0: { line: [], content: '', title: '' }, 2: {} } }
   chapters: [{
     lines: [], // 章节内容每行数组
@@ -38,11 +39,14 @@ export default {
     // 获取小说章节内容
     * getChapter({ payload }, { put, call, select }) {
       const { chapter: bookListChapter } = yield select(({ bookList }) => bookList);
-      const { storageCapter, pn, bookId, isRead } = yield select(({ chapterDetail }) => chapterDetail);
+      const { storagePageNumber, storageCapter, pn, bookId, isRead } = yield select(({ chapterDetail }) => chapterDetail);
 
       const chaptersObj = storageCapter[bookId] || {};
       const chapters = bookListChapter[bookId];
       let chapter = chapters[pn];
+
+      storagePageNumber[bookId] = pn;
+      yield call(storage.set, 'storagePageNumber', storagePageNumber);
 
       // 首先从缓存中获取数据
       if (chaptersObj[pn]) {
@@ -68,11 +72,23 @@ export default {
       const { url } = yield call(services.chapterDetail.getMp3Url, encodeURIComponent(text));
 
       yield put({ type: 'updateState', payload: { url, readIndex: index } });
-    }
+    },
+
+    // 获取缓存的阅读页数
+    * getPageNumber({ payload: { id } }, { put, call }) {
+      let storagePageNumber = yield call(storage.get, 'storagePageNumber');
+      storagePageNumber = storagePageNumber || {};
+      const pageNumber = storagePageNumber[id] || 0;
+console.log('pageNumber', pageNumber);
+      yield put({ type: 'updateState', payload: { pn: pageNumber, storagePageNumber } });
+      // 初始化当前页内容
+      yield put({ type: 'getChapter' });
+    },
   },
 
   reducers: {
     updateState(state, { payload }) {
+      console.log('payload', payload);
       return { ...state, ...payload };
     },
     resetState(state) {

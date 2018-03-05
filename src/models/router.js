@@ -29,7 +29,7 @@ export default {
 
   effects: {
     watch: [
-      function* subscription({ take, put, select }) {
+      function* subscription({ take, put, select, call }) {
         while (true) {
           const payload = yield take(actions);
           yield put(createAction('apply')(payload));
@@ -39,6 +39,7 @@ export default {
             const { chapter } = yield select(({ bookList }) => bookList);
             const { id } = payload.params;
 
+            yield put({ type: 'chapterDetail/getPageNumber', payload: { id } });
             yield put({ type: 'chapterDetail/updateState', payload: { chapters: chapter[id], bookId: id } });
           }
         }

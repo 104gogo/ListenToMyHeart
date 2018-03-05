@@ -22,10 +22,6 @@ export default class ChapterDetail extends PureComponent {
     this.handlePageIndexChanged = this.handlePageIndexChanged.bind(this);
   }
 
-  componentDidMount() {
-    this.props.getChapter(0);
-  }
-
   componentWillReceiveProps(nextProps) {
     // 循环播放mp3
     if ('url' in nextProps && this.props.url !== nextProps.url) {

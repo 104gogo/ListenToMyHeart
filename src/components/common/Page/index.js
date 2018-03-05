@@ -15,6 +15,7 @@ export default class Page extends PureComponent {
 
   render() {
     const {
+      pn,
       readIndex,
       chapters,
       isRead,
@@ -35,7 +36,7 @@ export default class Page extends PureComponent {
     );
 
     const swiperProps = {
-      index: 0,
+      index: pn,
       // loadMinimal: true,
       // loadMinimalSize: 1,
       style: styles.wrapper,
