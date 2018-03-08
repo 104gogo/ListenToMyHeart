@@ -41,6 +41,7 @@ export default class Page extends PureComponent {
       // loadMinimalSize: 1,
       style: styles.wrapper,
       showsPagination: false,
+      onIndexChanged: index => console.log('onIndexChanged', index),
       onMomentumScrollEnd: (event, state) => {
         console.log('onMomentumScrollEnd', state.index)
         onIndexChanged(state.index);

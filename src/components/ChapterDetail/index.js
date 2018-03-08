@@ -6,6 +6,8 @@ import {
 } from 'react-native';
 import Sound from 'react-native-sound';
 
+import Footer from './Footer';
+import ListModal from './ListModal';
 import { Back, Page } from '../common';
 import styles from './styles';
 
@@ -20,6 +22,8 @@ export default class ChapterDetail extends PureComponent {
     this.handleSoundClose = this.handleSoundClose.bind(this);
     this.handleToolBar = this.handleToolBar.bind(this);
     this.handlePageIndexChanged = this.handlePageIndexChanged.bind(this);
+    this.handleListPress = this.handleListPress.bind(this);
+    this.handleTitlePress = this.handleTitlePress.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -48,7 +52,7 @@ export default class ChapterDetail extends PureComponent {
             }
 
             // 翻页
-            this.page.scrollBy(pn + 1);
+            this.changePage(pn + 1);
             return;
           }
 
@@ -68,6 +72,13 @@ export default class ChapterDetail extends PureComponent {
 
   componentWillUnmount() {
     this.handleSoundClose();
+  }
+
+  // 确定页数翻页
+  changePage(nextPn) {
+    const { pn } = this.props;
+
+    this.page.scrollBy(nextPn - pn);
   }
 
   handleSoundClose() {
@@ -102,9 +113,26 @@ console.log('handleShowModal');
     this.props.getChapter(pn);
   }
 
+  // 显示选择章节弹出框
+  handleListPress() {
+    this.setState({ isShowHeader: false });
+    this.modal.open();
+  }
+
+  // 选择章节
+  handleTitlePress(pn) {
+    this.modal.close();
+    this.changePage(pn);
+  }
+
   render() {
     const { isShowHeader } = this.state;
     const { chapters, isRead, pn, readIndex } = this.props;
+
+    const listModalProps = {
+      chapters,
+      onTitlePress: this.handleTitlePress,
+    };
 
     return (
       <View style={styles.container}>
@@ -127,6 +155,11 @@ console.log('handleShowModal');
           onLinePress={this.handleToolBar}
           onArticlePress={this.handleShowModal}
           onIndexChanged={this.handlePageIndexChanged}
+        />
+        {isShowHeader ? <Footer onListPress={this.handleListPress} /> : null}
+        <ListModal
+          ref={modal => this.modal = modal}
+          {...listModalProps}
         />
       </View>
     );

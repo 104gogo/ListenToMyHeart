@@ -3,11 +3,29 @@
 ## 安装
 ```
 yarn
-cd ios && pod install
 ```
 
 ## 运行
 打开xcode，点击run按钮
+
+## 真机打包
+1. 先在项目中打包
+```
+npm run build
+```
+2. Product -> Scheme -> Edit Scheme -> Build Configuration 选择 release
+
+3. 修改ios/RNPro/AppDelegate.m
+```
+// 模拟器测试
+//   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  
+// 打包手机测试,改成访问本地的js服务器
+jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"bundles/main" withExtension:@"jsbundle"];
+
+```
+更多的环境变量已经在xcode中进行了配置
+4. 最后，点击运行
 
 ## 踩的坑
 ### RCTBridgeModule.h is not found

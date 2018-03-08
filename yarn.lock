@@ -4006,6 +4006,13 @@ react-native-easy-grid@0.1.15:
     prop-types "^15.5.10"
     react-timer-mixin "^0.13.3"
 
+react-native-modalbox@^1.4.2:
+  version "1.4.2"
+  resolved "http://10.2.1.224:4873/react-native-modalbox/-/react-native-modalbox-1.4.2.tgz#818c9354c9b13327ec807c6436e8516b3b419478"
+  dependencies:
+    create-react-class "^15.6.0"
+    prop-types "^15.5.10"
+
 react-native-sound@^0.10.5:
   version "0.10.5"
   resolved "http://10.2.1.224:4873/react-native-sound/-/react-native-sound-0.10.5.tgz#50aa0f3faf4ac7cf1e54e1dc48431d0ebcc47b26"
