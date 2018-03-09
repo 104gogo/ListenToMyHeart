@@ -8,10 +8,14 @@ export default StyleSheet.create({
     width: '100%',
     height: 65,
     zIndex: 10,
-    justifyContent: 'center',
   },
-  text: {
-    paddingLeft: 10,
+  icon: {
+    width: 30,
+    height: 30,
     color: '#fff',
+  },
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

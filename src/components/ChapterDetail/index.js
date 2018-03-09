@@ -8,6 +8,7 @@ import Sound from 'react-native-sound';
 
 import Footer from './Footer';
 import ListModal from './ListModal';
+import TimeModal from './TimeModal';
 import { Back, Page } from '../common';
 import styles from './styles';
 
@@ -161,6 +162,7 @@ console.log('handleShowModal');
           ref={modal => this.modal = modal}
           {...listModalProps}
         />
+        <TimeModal />
       </View>
     );
   }

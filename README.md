@@ -13,6 +13,7 @@ yarn
 ```
 npm run build
 ```
+
 2. Product -> Scheme -> Edit Scheme -> Build Configuration 选择 release
 
 3. 修改ios/RNPro/AppDelegate.m
@@ -25,6 +26,9 @@ jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"bundles/main" withExten
 
 ```
 更多的环境变量已经在xcode中进行了配置
+- host
+- 打多个app
+
 4. 最后，点击运行
 
 ## 踩的坑
