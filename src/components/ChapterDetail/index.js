@@ -8,7 +8,6 @@ import Sound from 'react-native-sound';
 
 import Footer from './Footer';
 import ListModal from './ListModal';
-import TimeModal from './TimeModal';
 import { Back, Page } from '../common';
 import styles from './styles';
 
@@ -17,9 +16,9 @@ export default class ChapterDetail extends PureComponent {
     super();
 
     this.state = { isShowHeader: false };
+    this.timer = null;
 
     this.handleLineLongPress = this.handleLineLongPress.bind(this);
-    this.handleShowModal = this.handleShowModal.bind(this);
     this.handleSoundClose = this.handleSoundClose.bind(this);
     this.handleToolBar = this.handleToolBar.bind(this);
     this.handlePageIndexChanged = this.handlePageIndexChanged.bind(this);
@@ -57,7 +56,7 @@ export default class ChapterDetail extends PureComponent {
             return;
           }
 
-          this.handleSoundClose();
+          this.closeAllEvent();
         });
       });
     }
@@ -72,7 +71,12 @@ export default class ChapterDetail extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.handleSoundClose();
+    this.closeAllEvent();
+  }
+
+  closeAllEvent() {
+    clearInterval(this.timer);
+    this.soundClose();
   }
 
   // 确定页数翻页
@@ -82,7 +86,7 @@ export default class ChapterDetail extends PureComponent {
     this.page.scrollBy(nextPn - pn);
   }
 
-  handleSoundClose() {
+  soundClose() {
     const { isRead, updateState } = this.props;
 
     if (isRead) {
@@ -94,6 +98,10 @@ export default class ChapterDetail extends PureComponent {
 
   handleLineLongPress(text, index) {
     this.props.getMp3Url(text, index);
+
+    this.timer = setInterval(() => {
+      this.closeAllEvent();
+    }, 30 * 60 * 1000);
   }
 
   // 控制工具栏的显隐
@@ -101,12 +109,9 @@ export default class ChapterDetail extends PureComponent {
     this.setState({ isShowHeader: !this.state.isShowHeader });
   }
 
-  // 显示播放栏
-  handleShowModal() {
-    // TODO
-console.log('handleShowModal');
-
-    this.handleSoundClose();
+  // 点击后关闭语音
+  handleSoundClose() {
+    this.closeAllEvent();
   }
 
   // 翻页获取内容
@@ -154,7 +159,7 @@ console.log('handleShowModal');
           chapters={chapters}
           onLineLongPress={this.handleLineLongPress}
           onLinePress={this.handleToolBar}
-          onArticlePress={this.handleShowModal}
+          onArticlePress={this.handleSoundClose}
           onIndexChanged={this.handlePageIndexChanged}
         />
         {isShowHeader ? <Footer onListPress={this.handleListPress} /> : null}
@@ -162,7 +167,6 @@ console.log('handleShowModal');
           ref={modal => this.modal = modal}
           {...listModalProps}
         />
-        <TimeModal />
       </View>
     );
   }
